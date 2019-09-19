@@ -1,12 +1,31 @@
 
-/*
+
 var db = require("../models");
 
+
+
 module.exports = function(app) {
+
+  app.get("/", function(req, res) {
+      res.render("index");
+  });
+
+  app.get("/grocery", function(req, res) {
+    res.render("grocery");
+  });
+
+  app.get("/task", function(req, res) {
+    res.render("task");
+  });
+
+  app.get("/note", function(req, res) {
+    res.render("note");
+  });
+/*
   // Load index page
   app.get("/", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
-      res.render("index", {
+      res.render("grocery", {
         msg: "Day Planner",
         examples: dbExamples
       });
@@ -26,6 +45,7 @@ module.exports = function(app) {
   app.get("*", function(req, res) {
     res.render("404");
   });
+*/
 };
 
-*/
+

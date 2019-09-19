@@ -4,6 +4,36 @@
       <div class="col-12">
         <h1 class="text-center">{{msg}}</h1>
         <h2 class="text-center">Home Page (figure out how to put current date here)</h2>
+      </div>
+      <div class="firstColumn col-6">
+        <div class="calendarContainer">
+          <h2>Calendar</h2>
+          <div class="calendar border border-primary rounded" style="height: 200px">
+
+          </div>
+        </div>
+        <div class="notesContainer">
+          <h2>Notes</h2>
+          <div class="notes border border-info rounded" style="height:200px">
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="secondColumn col-3">
+        <div class="todoContainer">
+          <h2>To Do</h2>
+          <div class="todo border border-danger rounded" style="height: 450px"></div>
+        </div>
+      </div>
+
+      <div class="thirdColumn col-3">
+        <div class="groceryContainer">
+          <h2>Grocery List</h2>
+          <div class="grocery border border-warning rounded" style="height: 450px"></div>
+        </div>
+      </div>
+      {{!-- <div class="col-12">
         <form class="clearfix mb-4" action="POST">
           <div class="form-group">
             <label for="example-text">Example Text</label>
@@ -24,7 +54,7 @@
           </li>
           {{/each}}
         </ul>
-      </div>
+      </div> --}}
     </div>
   </div>
 </div>
