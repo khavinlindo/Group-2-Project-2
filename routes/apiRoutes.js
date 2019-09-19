@@ -15,14 +15,14 @@ module.exports = function(app) {
   //===========================================================================
   
   // Get all groceries
-  app.get("/api/all", function(req, res) {
+  app.get("/api/groceries/all", function(req, res) {
     db.Grocery.findAll({}).then(function(results) {
       res.json(results);
     });
   });
 
   // Get a grocery by specific catagory
-  app.get("/api/:catagory", function(req, res) {
+  app.get("/api/groceries/:catagory", function(req, res) {
     db.Grocery.findAll({
       where: {
        category : req.params.catagory
@@ -34,22 +34,24 @@ module.exports = function(app) {
 
 
   // Add a Grocery Item
-  app.post("/api/new", function(req, res) {
-    console.log("Grocery Data:");
+  app.post("/api/groceries/new", function(req, res) {
+    console.log("Grocery Data: ");
     console.log(req.body);
-    Book.create({
-      item: req.body.title,
-      catagory: req.body.author
+    
+    db.Grocery.create({
+      item: req.body.item,
+      catagory: req.body.category,
+      amount: req.body.amount
     }).then(function(results) {
       res.json(results);
     });
   });
 
 // Delete a Grocery Item
-  app.delete("/api/grocery/:id", function(req, res) {
+  app.delete("/api/groceries/delete/:id", function(req, res) {
     console.log("Grocery ID:");
     console.log(req.params.id);
-    Grocery.destroy({
+    db.Grocery.destroy({
       where: {
         id: req.params.id
       }
@@ -60,8 +62,6 @@ module.exports = function(app) {
   
   
   
-  
-  
   //====================================================
   // Task List -- ID, Task, Priority
   //    urgency -- 1) Top Priority, 2) Done Today, 3) This Week
@@ -69,15 +69,15 @@ module.exports = function(app) {
     
   
   //Get all tasks
-  app.get("/api/all", function(req, res) {
-      Task.findAll({}).then(function(results) {
+  app.get("/api/tasks/all", function(req, res) {
+      db.Task.findAll({}).then(function(results) {
         res.json(results);
       });
     });
   
-  // Get a task by specific catagory
-    app.get("/api/:urgency", function(req, res) {
-      Task.findAll({
+  // Get a task by specific category
+    app.get("/api/tasks/:urgency", function(req, res) {
+      db.Task.findAll({
         where: {
           urgency : req.params.urgency
         }
@@ -88,22 +88,22 @@ module.exports = function(app) {
 
   
   // Add a Task
-  app.post("/api/new", function(req, res) {
-    console.log("Task Data:");
+  app.post("/api/tasks/new", function(req, res) {
+    console.log("Task Data: ");
     console.log(req.body);
-    Task.create({
-      task: req.body.title,
-      urgency: req.body.author
+    db.Task.create({
+      task: req.body.task,
+      urgency: req.body.urgency
     }).then(function(results) {
       res.json(results);
     });
   });
   
   // Delete a Task
-  app.delete("/api/task/:id", function(req, res) {
-    console.log("Task ID:");
+  app.delete("/api/tasks/delete/:id", function(req, res) {
+    console.log("Task ID: ");
     console.log(req.params.id);
-    Task.destroy({
+    db.Task.destroy({
       where: {
         id: req.params.id
       }
@@ -120,16 +120,16 @@ module.exports = function(app) {
   //=====================================================  
   
   // Get all Notes
-    app.get("/api/all", function(req, res) {
-      Notes.findAll({}).then(function(results) {
+    app.get("/api/notes/all", function(req, res) {
+      db.Notes.findAll({}).then(function(results) {
         res.json(results);
       });
     });
   
     
     // Get a note by specific Author
-    app.get("/api/:author", function(req, res) {
-      Task.findAll({
+    app.get("/api/notes/:author", function(req, res) {
+      db.Notes.findAll({
         where: {
           author : req.params.author
         }
@@ -140,10 +140,10 @@ module.exports = function(app) {
 
   
   // Add a Note
-  app.post("/api/new", function(req, res) {
-    console.log("Note Data:");
+  app.post("/api/notes/new", function(req, res) {
+    console.log("Note Data: ");
     console.log(req.body);
-    Note.create({
+    db.Notes.create({
       note: req.body.note,
       author: req.body.author
     }).then(function(results) {
@@ -153,10 +153,10 @@ module.exports = function(app) {
   
 
   // Delete a Note
-  app.delete("/api/note/:id", function(req, res) {
-    console.log("Note ID:");
+  app.delete("/api/notes/delete/:id", function(req, res) {
+    console.log("Note ID: ");
     console.log(req.params.id);
-    Note.destroy({
+    db.Notes.destroy({
       where: {
         id: req.params.id
       }

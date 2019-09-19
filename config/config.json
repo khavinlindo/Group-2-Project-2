@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "zfbhc$85",
+    "password": "",
     "database": "daytimer_db",
     "host": "localhost",
     "dialect": "mysql"
