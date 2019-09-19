@@ -1,158 +1,162 @@
-// *********************************************************************************
-// api-routes.js - this file offers a set of routes for displaying and saving data to the db
-// *********************************************************************************
+
 
 // Dependencies
 // =============================================================
-var Grocery = require("../models/Grocery.js");
-var Task = require("../models/Task.js");
-var Notes = require("../models/Notes.js");
+var db = require("../models");
 
-// Routes
-// =============================================================
-
-// Grocery List -- ID, Item, Catagory
-//    catagories -- 1) produce 2) meats, 3) dairy, 4) dry goods, 5) non-grocery
-
+//=============================================================//
+//Routes
+//=============================================================//
 module.exports = function(app) {
+  
+
+  /** Grocery List -- ID, Item, Catagory=======================================
+    catagories -- 1) produce 2) meats, 3) dairy, 4) dry goods, 5) non-grocery*/
+  //===========================================================================
+  
   // Get all groceries
-  app.get("/api/all", function(req, res) {
-    Grocery.findAll({}).then(function(results) {
+  app.get("/api/groceries/all", function(req, res) {
+    db.Grocery.findAll({}).then(function(results) {
       res.json(results);
     });
   });
 
-  // Get a specific catagory
-  app.get("/api/:catagory", function(req, res) {
-    Grocery.findAll({
+  // Get a grocery by specific catagory
+  app.get("/api/groceries/:catagory", function(req, res) {
+    db.Grocery.findAll({
       where: {
-        catagory: req.params.catagory
+       category : req.params.catagory
       }
     }).then(function(results) {
       res.json(results);
     });
   });
 
+
+  // Add a Grocery Item
+  app.post("/api/groceries/new", function(req, res) {
+    console.log("Grocery Data: ");
+    console.log(req.body);
+    
+    db.Grocery.create({
+      item: req.body.item,
+      catagory: req.body.category,
+      amount: req.body.amount
+    }).then(function(results) {
+      res.json(results);
+    });
+  });
+
+// Delete a Grocery Item
+  app.delete("/api/groceries/delete/:id", function(req, res) {
+    console.log("Grocery ID:");
+    console.log(req.params.id);
+    db.Grocery.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function() {
+      res.end();
+    });
+  });
+  
+  
+  
   //====================================================
   // Task List -- ID, Task, Priority
   //    urgency -- 1) Top Priority, 2) Done Today, 3) This Week
-
-  // Get all Tasks 
-  module.exports = function(app) {
-    // Get all groceries
-    app.get("/api/all", function(req, res) {
-      Task.findAll({}).then(function(results) {
+  //=========================================================
+    
+  
+  //Get all tasks
+  app.get("/api/tasks/all", function(req, res) {
+      db.Task.findAll({}).then(function(results) {
         res.json(results);
       });
     });
   
-    // Get a specific catagory
-    app.get("/api/:urgency", function(req, res) {
-      Task.findAll({
+  // Get a task by specific category
+    app.get("/api/tasks/:urgency", function(req, res) {
+      db.Task.findAll({
         where: {
-          urgency: req.params.urgency
+          urgency : req.params.urgency
         }
       }).then(function(results) {
         res.json(results);
       });
     });
+
+  
+  // Add a Task
+  app.post("/api/tasks/new", function(req, res) {
+    console.log("Task Data: ");
+    console.log(req.body);
+    db.Task.create({
+      task: req.body.task,
+      urgency: req.body.urgency
+    }).then(function(results) {
+      res.json(results);
+    });
+  });
+  
+  // Delete a Task
+  app.delete("/api/tasks/delete/:id", function(req, res) {
+    console.log("Task ID: ");
+    console.log(req.params.id);
+    db.Task.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function() {
+      res.end();
+    });
+  });
+  
+  
+
 
   //=====================================================
   //Notes -- ID, Note, Author
-
+  //=====================================================  
+  
   // Get all Notes
-  module.exports = function(app) {
-    // Get all Notes
-    app.get("/api/all", function(req, res) {
-      Notes.findAll({}).then(function(results) {
+    app.get("/api/notes/all", function(req, res) {
+      db.Notes.findAll({}).then(function(results) {
         res.json(results);
       });
     });
   
-    // Get a specific Author
-    app.get("/api/:author", function(req, res) {
-      Task.findAll({
+    
+    // Get a note by specific Author
+    app.get("/api/notes/:author", function(req, res) {
+      db.Notes.findAll({
         where: {
-          author: req.params.author
+          author : req.params.author
         }
       }).then(function(results) {
         res.json(results);
       });
     });
 
-  //=====================================================
-
-  // Add a Grocery Item
-  app.post("/api/new", function(req, res) {
-    console.log("Grocery Data:");
-    console.log(req.body);
-    Book.create({
-      item: req.body.title,
-      catagory: req.body.author
-    }).then(function(results) {
-      res.json(results);
-    });
-  });
-
-  // Delete a Grocery Item
-  app.delete("/api/grocery/:id", function(req, res) {
-    console.log("Grocery ID:");
-    console.log(req.params.id);
-    Grocery.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then(function() {
-      res.end();
-    });
-  });
-};
-
-//========================================================
-  // Add a Task
-  app.post("/api/new", function(req, res) {
-    console.log("Task Data:");
-    console.log(req.body);
-    Task.create({
-      task: req.body.title,
-      urgency: req.body.author
-    }).then(function(results) {
-      res.json(results);
-    });
-  });
-
-  // Delete a Task
-  app.delete("/api/task/:id", function(req, res) {
-    console.log("Task ID:");
-    console.log(req.params.id);
-    Task.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then(function() {
-      res.end();
-    });
-  });
-};
-
-//========================================================
+  
   // Add a Note
-  app.post("/api/new", function(req, res) {
-    console.log("Note Data:");
+  app.post("/api/notes/new", function(req, res) {
+    console.log("Note Data: ");
     console.log(req.body);
-    Note.create({
+    db.Notes.create({
       note: req.body.note,
       author: req.body.author
     }).then(function(results) {
       res.json(results);
     });
   });
+  
 
   // Delete a Note
-  app.delete("/api/note/:id", function(req, res) {
-    console.log("Note ID:");
+  app.delete("/api/notes/delete/:id", function(req, res) {
+    console.log("Note ID: ");
     console.log(req.params.id);
-    Note.destroy({
+    db.Notes.destroy({
       where: {
         id: req.params.id
       }
@@ -162,4 +166,3 @@ module.exports = function(app) {
   });
 };
 
-//========================================================
