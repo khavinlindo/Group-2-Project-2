@@ -22,7 +22,7 @@ module.exports = function(app) {
   });
 
   // Get a grocery by specific catagory
-  app.get("/api/groceries/:catagory", function(req, res) {
+  app.get("/api/groceries/:category", function(req, res) {
     db.Grocery.findAll({
       where: {
        category : req.params.catagory
@@ -40,7 +40,7 @@ module.exports = function(app) {
     
     db.Grocery.create({
       item: req.body.item,
-      catagory: req.body.category,
+      category: req.body.category,
       amount: req.body.amount
     }).then(function(results) {
       res.json(results);

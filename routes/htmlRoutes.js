@@ -7,7 +7,23 @@ var db = require("../models");
 module.exports = function(app) {
 
   app.get("/", function(req, res) {
-      res.render("index");
+    db.Grocery.findAll({}).then(function(dbGroceries) {
+      res.render("index", {
+        groceries: dbGroceries
+      });
+    });
+
+    db.Task.findAll({}).then(function(dbTasks) {
+      res.render("index", {
+        tasks: dbTasks
+      });
+    });
+
+    db.Notes.findAll({}).then(function(dbNotes) {
+      res.render("index", {
+        notes: dbNotes
+      });
+    });
   });
 
   app.get("/grocery", function(req, res) {
