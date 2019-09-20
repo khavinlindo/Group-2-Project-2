@@ -25,7 +25,7 @@ module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
-      res.render("grocery", {
+      res.render("note", {
         msg: "Day Planner",
         examples: dbExamples
       });
