@@ -2,14 +2,11 @@
 
 var db = require("../models");
 
-function getData() {
-  
-}
+
 
 module.exports = function(app) {
 
   app.get("/", function(req, res) {
-    
     
     
     db.Grocery.findAll({}).then(function(dbGroceries) {
@@ -18,19 +15,22 @@ module.exports = function(app) {
       });
     });
 
-    db.Task.findAll({}).then(function(dbTasks) {
-      res.render("index", {
-        tasks: dbTasks
-      });
-    });
+    // db.Task.findAll({}).then(function(dbTasks) {
+    //   res.render("index", {
+    //     tasks: dbTasks
+    //   });
+    // });
 
-    db.Notes.findAll({}).then(function(dbNotes) {
-      res.render("index", {
-        notes: dbNotes
-      });
-    });
+    // db.Notes.findAll({}).then(function(dbNotes) {
+    //   res.render("index", {
+    //     notes: dbNotes
+    //   });
+    // });
+
   });
 
+  
+  
   app.get("/grocery", function(req, res) {
     res.render("grocery");
   });
