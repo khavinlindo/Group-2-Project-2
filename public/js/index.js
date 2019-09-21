@@ -27,6 +27,8 @@ $(document).ready(function () {
         JSON.stringify(data);
         console.log(data);
       });
+
+      $.get("/");
       
   });
 
@@ -61,7 +63,20 @@ $(document).ready(function () {
 
 });
 
-$("")
+$("#noteButton").on("click", function () {
+  
+  var note = {
+    author: $("#noteAuthor").val(),
+    note: $("#noteArea").val()
+  }
+
+
+  $.post("/api/notes/new", note)
+  .then(function(data) {
+    JSON.stringify(data);
+    console.log(data);
+  })
+});
 
 
 

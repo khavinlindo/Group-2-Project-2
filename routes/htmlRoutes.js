@@ -2,11 +2,16 @@
 
 var db = require("../models");
 
-
+function getData() {
+  
+}
 
 module.exports = function(app) {
 
   app.get("/", function(req, res) {
+    
+    
+    
     db.Grocery.findAll({}).then(function(dbGroceries) {
       res.render("index", {
         groceries: dbGroceries
