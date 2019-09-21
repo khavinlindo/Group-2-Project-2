@@ -40,7 +40,7 @@ module.exports = function(app) {
     
     db.Grocery.create({
       item: req.body.item,
-      catagory: req.body.category,
+      category: req.body.category,
       amount: req.body.amount
     }).then(function(results) {
       res.json(results);

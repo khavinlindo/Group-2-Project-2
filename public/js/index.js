@@ -3,34 +3,65 @@
 
 //Add grocery item to database
 
-$( document ).ready(function() {
-  console.log( "ready!" );
+$(document).ready(function () {
+  console.log("ready!");
 
 
-$("#groceryButton").on("click", function() {
+  $("#groceryButton").on("click", function () {
 
-var grocery = {
-   item: $("#item").val(),
-   category: $("#category").val(),
-   amount: $("#quantity").val(),
-   
-}
+    var grocery = {
+      item: $("#item").val(),
+      category: $("#category").val(),
+      amount: $("#quantity").val(),
 
-  console.log(grocery.item);
-  console.log(grocery.category);
-  console.log(grocery.amount);
-  
+    }
 
-  $.post("/api/groceries/new", grocery)
-  .then(function(data) {
-       
-       JSON.stringify(data);
-       console.log(data);
+    console.log(grocery.item);
+    console.log(grocery.category);
+    console.log(grocery.amount);
+
+
+    $.post("/api/groceries/new", grocery)
+      .then(function (data) {
+
+        JSON.stringify(data);
+        console.log(data);
+      });
+      
   });
-});
 
 
+  $("#addTask").on("click", function () {
+
+     var priority;
+     
+     if ($("#todayButton").val()) {
+       priority = 1;
+     }
+
+     if ($("#thisWeekButton").val()) {
+       priority = 3;
+     }
+
+     if ($("#asapButton").val()) {
+       priority = 2;
+     }
+
+    var task = {
+      task: $("#taskInput").val(),
+      urgency: priority
+    }
+
+    $.post("/api/tasks/new", task)
+    .then(function(data) {
+      JSON.stringify(data);
+      console.log(data);
+    })
+  });
+
 });
+
+$("")
 
 
 
