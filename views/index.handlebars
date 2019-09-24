@@ -4,6 +4,14 @@
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
         <h2>This is our Home Page!</h2>
+
+          <p>Current Date and Time: <span id="datetime"></span></p>
+
+          <script>
+          var dt = new Date();
+          document.getElementById("datetime").innerHTML = dt.toLocaleString();
+          </script>
+
         <form class="clearfix mb-4" action="POST">
           <div class="form-group">
             <label for="example-text">Example Text</label>
