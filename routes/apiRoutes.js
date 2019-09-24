@@ -35,14 +35,12 @@ module.exports = function(app) {
 
   // Add a Grocery Item
   app.post("/api/groceries/new", function(req, res) {
-    console.log("Grocery Data: ");
-    console.log(req.body);
-    
     db.Grocery.create({
       item: req.body.item,
       category: req.body.category,
       amount: req.body.amount
     }).then(function(results) {
+      
       res.json(results);
     });
   });

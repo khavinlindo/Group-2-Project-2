@@ -1,19 +1,17 @@
 
 
 
-//Add grocery item to database
+
 
 $(document).ready(function () {
-  console.log("ready!");
 
-
+//Add grocery item to database
   $("#groceryButton").on("click", function () {
 
     var grocery = {
       item: $("#item").val(),
-      category: $("#category").val(),
-      amount: $("#quantity").val(),
-
+      category: $("#groceryCategory").val(),
+      amount: $("#groceryQuantity").val(),
     }
 
     console.log(grocery.item);
@@ -28,11 +26,11 @@ $(document).ready(function () {
         console.log(data);
       });
 
-      $.get("/");
+    
       
   });
 
-
+  //Add task to database
   $("#addTask").on("click", function () {
 
      var priority;
@@ -63,6 +61,7 @@ $(document).ready(function () {
 
 });
 
+//Add note to database
 $("#noteButton").on("click", function () {
   
   var note = {
@@ -76,6 +75,11 @@ $("#noteButton").on("click", function () {
     JSON.stringify(data);
     console.log(data);
   })
+});
+
+$(".homeButton").on("click", function () {
+ 
+    location.href = "/";
 });
 
 
