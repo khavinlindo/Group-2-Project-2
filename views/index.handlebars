@@ -24,10 +24,14 @@
         <div class="notesContainer">
           <h2><a href="/note">Notes</h2></a>
           <div class="notes border border-info rounded" style="height:200px">
-            <ul id="groceryList" class="list-group">
+            <ul id="noteList" class="list-group">
               {{#each notes}}
               <li data-id="{{this.id}}" class="list-group-item">
-            {{this.author}}, {{this.note}}
+                        <button class="deleteNote" class="btn btn-danger btn-sm float-right delete">ｘ</button>
+
+            <strong>By: </strong>{{this.author}}
+            <br>
+            <strong>Note: </strong>{{this.note}}
           </li>
           {{/each}}
             </ul>
@@ -42,7 +46,9 @@
               <ul id="taskList" class="list-group">
               {{#each tasks}}
               <li data-id="{{this.id}}" class="list-group-item">
-            {{this.task}}, {{this.urgency}}
+            <button id="deleteTask" class="btn btn-danger btn-sm float-right delete">ｘ</button>
+            <strong>Task: </strong>{{this.task}}
+            <strong>Urgency: </strong>{{this.urgency}}
           </li>
           {{/each}}
             </ul>
@@ -57,11 +63,18 @@
             <ul id="groceryList" class="list-group">
               {{#each groceries}}
               <li data-id="{{this.id}}" class="list-group-item">
-            {{this.item}}, {{this.category}}, {{this.amount}}
+                  <button id="deleteGrocery" class="btn btn-danger btn-sm float-right delete">ｘ</button>
+
+            <strong>Item: </strong>{{this.item}}
+            <br> 
+            <strong>Amount: </strong>{{this.amount}}
+            <br>
+            <strong>Category: </strong>{{this.category}} 
           </li>
           {{/each}}
             </ul>
           </div>
+
         </div>
       </div>
 

@@ -25,7 +25,7 @@ module.exports = function(app) {
   app.get("/api/groceries/:category", function(req, res) {
     db.Grocery.findAll({
       where: {
-       category : req.params.catagory
+       category : req.params.category
       }
     }).then(function(results) {
       res.json(results);

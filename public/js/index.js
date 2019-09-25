@@ -34,19 +34,15 @@ $(document).ready(function () {
   //Add task to database
   $("#addTask").on("click", function () {
 
-    var priority;
-
-    if ($("#todayButton").val()) {
-      priority = 1;
-    }
-
-    if ($("#thisWeekButton").val()) {
-      priority = 3;
-    }
-
-    if ($("#asapButton").val()) {
-      priority = 2;
-    }
+     var priority;
+     
+     if ($("#todayButton").val()) {
+       priority = 1;
+     } else if ($("#thisWeekButton").val()) {
+       priority = 3;
+     } else if ($("#asapButton").val()) {
+       priority = 2;
+     }
 
     var task = {
       task: $("#taskInput").val(),
@@ -60,6 +56,37 @@ $(document).ready(function () {
         console.log(data);
       })
   });
+
+});
+
+//Add note to database
+$("#noteButton").on("click", function () {
+  
+  var note = {
+    author: $("#noteAuthor").val(),
+    note: $("#noteArea").val()
+  }
+
+
+  $.post("/api/notes/new", note)
+  .then(function(data) {
+    JSON.stringify(data);
+    console.log(data);
+  })
+});
+
+$(".deleteNote").on("click", function (id) {
+  $.delete("/api/notes/delete/" + id);
+})
+
+$(".homeButton").on("click", function () {
+ 
+    location.href = "/";
+});
+
+$('[data-spy="scroll"]').each(function () {
+  var $spy = $(this).scrollspy('refresh')
+})
 
 
   //Add note to database
@@ -91,7 +118,7 @@ $(document).ready(function () {
     location.href = "/";
   });
 
-});
+
 
 
 
