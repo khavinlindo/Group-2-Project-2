@@ -38,7 +38,8 @@ module.exports = function(app) {
     db.Grocery.create({
       item: req.body.item,
       category: req.body.category,
-      amount: req.body.amount
+      amount: req.body.amount,
+      date: req.body.date
     }).then(function(results) {
       
       res.json(results);
@@ -91,7 +92,8 @@ module.exports = function(app) {
     console.log(req.body);
     db.Task.create({
       task: req.body.task,
-      urgency: req.body.urgency
+      urgency: req.body.urgency,
+      date: req.body.date
     }).then(function(results) {
       res.json(results);
     });
@@ -111,7 +113,6 @@ module.exports = function(app) {
   });
   
   
-
 
   //=====================================================
   //Notes -- ID, Note, Author
@@ -143,7 +144,8 @@ module.exports = function(app) {
     console.log(req.body);
     db.Notes.create({
       note: req.body.note,
-      author: req.body.author
+      author: req.body.author,
+      date: req.body.date,
     }).then(function(results) {
       res.json(results);
     });
