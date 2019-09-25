@@ -37,13 +37,9 @@ $(document).ready(function () {
      
      if ($("#todayButton").val()) {
        priority = 1;
-     }
-
-     if ($("#thisWeekButton").val()) {
+     } else if ($("#thisWeekButton").val()) {
        priority = 3;
-     }
-
-     if ($("#asapButton").val()) {
+     } else if ($("#asapButton").val()) {
        priority = 2;
      }
 
@@ -77,12 +73,18 @@ $("#noteButton").on("click", function () {
   })
 });
 
+$(".deleteNote").on("click", function (id) {
+  $.delete("/api/notes/delete/" + id);
+})
+
 $(".homeButton").on("click", function () {
  
     location.href = "/";
 });
 
-
+$('[data-spy="scroll"]').each(function () {
+  var $spy = $(this).scrollspy('refresh')
+})
 
 
 

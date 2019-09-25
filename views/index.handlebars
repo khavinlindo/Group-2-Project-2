@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-12">
         <h1 class="text-center">{{msg}}</h1>
-        <h2 class="text-center">Home Page (figure out how to put current date here)</h2>
-        <p>Current Date and Time: <span id="datetime"></span></p>
+        <h2 id="title" class="text-center">Day Planner</h2>
+        <p class="text-center">Current Date and Time: <span id="datetime"></span></p>
          <script>
          var dt = new Date();
          document.getElementById("datetime").innerHTML = dt.toLocaleString();
@@ -20,10 +20,14 @@
         <div class="notesContainer">
           <h2><a href="/note">Notes</h2></a>
           <div class="notes border border-info rounded" style="height:200px">
-            <ul id="groceryList" class="list-group">
+            <ul id="noteList" class="list-group">
               {{#each notes}}
               <li data-id="{{this.id}}" class="list-group-item">
-            {{this.author}}, {{this.note}}
+                        <button class="deleteNote" class="btn btn-danger btn-sm float-right delete">ｘ</button>
+
+            <strong>By: </strong>{{this.author}}
+            <br>
+            <strong>Note: </strong>{{this.note}}
           </li>
           {{/each}}
             </ul>
@@ -38,7 +42,9 @@
               <ul id="taskList" class="list-group">
               {{#each tasks}}
               <li data-id="{{this.id}}" class="list-group-item">
-            {{this.task}}, {{this.urgency}}
+            <button id="deleteTask" class="btn btn-danger btn-sm float-right delete">ｘ</button>
+            <strong>Task: </strong>{{this.task}}
+            <strong>Urgency: </strong>{{this.urgency}}
           </li>
           {{/each}}
             </ul>
@@ -53,11 +59,18 @@
             <ul id="groceryList" class="list-group">
               {{#each groceries}}
               <li data-id="{{this.id}}" class="list-group-item">
-            {{this.item}}, {{this.category}}, {{this.amount}}
+                  <button id="deleteGrocery" class="btn btn-danger btn-sm float-right delete">ｘ</button>
+
+            <strong>Item: </strong>{{this.item}}
+            <br> 
+            <strong>Amount: </strong>{{this.amount}}
+            <br>
+            <strong>Category: </strong>{{this.category}} 
           </li>
           {{/each}}
             </ul>
           </div>
+
         </div>
       </div>
 

@@ -1,3 +1,26 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+body {
+  position: relative;
+}
+
+.grocery {
+  height: 450px;
+  overflow-y: scroll;
+}
+
+.notes {
+  height: 450px;
+  overflow-y: scroll;
+}
+
+.todo {
+  height: 450px;
+  overflow-y: scroll;
+}
+
+#title {
+  font-size: 100px;
+}

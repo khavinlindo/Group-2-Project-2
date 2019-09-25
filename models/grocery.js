@@ -2,7 +2,7 @@ module.exports = function (sequelize, DataTypes) {
     
   var Grocery = sequelize.define("Grocery", {
     item: DataTypes.STRING,
-    category: DataTypes.INTEGER,
+    category: DataTypes.STRING,
     amount: DataTypes.INTEGER
   });
 
