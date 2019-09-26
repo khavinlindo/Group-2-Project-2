@@ -1,60 +1,51 @@
-
-
 var db = require("../models");
-
 
 module.exports = function (app) {
 
   app.get("/", function (req, res) {
 
     //Formats current date
-   var dT = new Date();
-   var day = dT.getDate();
-   var month;
-   if ((dT.getMonth()+1 < 10)) {
-     month = "0"+(dT.getMonth()+1)
-   }
-   else if ((dT.getMonth()+1 >= 10)) {
-     month=dT.getMonth()+1;
-   }
-   var year = dT.getFullYear();
-    
+    var dT = new Date();
+    var day = dT.getDate();
+    var month;
 
+    if ((dT.getMonth()+1 < 10)) {
+     month = "0"+(dT.getMonth()+1)
+    } else if ((dT.getMonth()+1 >= 10)) {
+     month=dT.getMonth()+1;
+    }
+
+    var year = dT.getFullYear();
     var dayPlannerObject = {};
-    
     var currentDate = year + "-" + month + "-" + day;
     var returnDate = req.query.date || currentDate; 
 
-  
     db.Grocery.findAll({
       where: {date: returnDate} 
-    })
-      .then(function (dbGroceries) {
+    }).then(function (dbGroceries) {
       
-        dayPlannerObject.groceries = dbGroceries;
+      dayPlannerObject.groceries = dbGroceries;
 
-        db.Task.findAll({
-          where: {date: returnDate} 
-        })
-          .then(function (dbTasks) {
+      db.Task.findAll({
+        where: {date: returnDate} 
+      }).then(function (dbTasks) {
             
-            dayPlannerObject.tasks = dbTasks;
+        dayPlannerObject.tasks = dbTasks;
 
-            db.Notes.findAll({
-              where: {date: returnDate} 
-            })
-              .then(function (dbNotes) {
+        db.Notes.findAll({
+          where: {date: returnDate} 
+        }).then(function (dbNotes) {
               
-                dayPlannerObject.notes = dbNotes;
+          dayPlannerObject.notes = dbNotes
 
-                res.render("index", {
-                  groceries: dayPlannerObject.groceries,
-                  tasks: dayPlannerObject.tasks,
-                  notes: dayPlannerObject.notes
-                });
-              });
+          res.render("index", {
+            groceries: dayPlannerObject.groceries,
+            tasks: dayPlannerObject.tasks,
+            notes: dayPlannerObject.notes
           });
+        });
       });
+    });
   });
 
 
@@ -73,8 +64,6 @@ module.exports = function (app) {
   app.get("/homepage", function (req, res) {
     res.redirect("/");
   });
-
-  
 };
 
 

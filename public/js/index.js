@@ -1,22 +1,16 @@
-
-
 $(document).ready(function () {
-  console.log("ready!");
 
   var dT = new Date();
-
   var day = dT.getDate();
-
   var month;
+
   if ((dT.getMonth() + 1 < 10)) {
     month = "0" + (dT.getMonth() + 1)
-  }
-  else if ((dT.getMonth() + 1 >= 10)) {
+  } else if ((dT.getMonth() + 1 >= 10)) {
     month = dT.getMonth() + 1;
   }
 
   var year = dT.getFullYear();
-
 
   //Add grocery item to database
   $("#groceryButton").on("click", function () {
@@ -28,17 +22,17 @@ $(document).ready(function () {
       date: year + "-" + month + "-" + day
     }
 
-
     $.post("/api/groceries/new", grocery)
       .then(function (data) {
+
         $('#item').val('');
         $('#groceryCategory').val('');
         $('#groceryQuantity').val('');
+
         JSON.stringify(data);
         console.log(data);
       });
   });
-
 
   //Delete grocery item from database
   $(".deleteGrocery").on("click", function () {
@@ -50,15 +44,12 @@ $(document).ready(function () {
       type: "DELETE"
     }).then(function (result) {
       console.log(result);
-    location.href = "/";
+      location.href = "/";
     });
   });
 
-
-
-
-  // //Add task to database
-   $("#addTask").on("click", function () {
+  //Add task to database
+  $("#addTask").on("click", function () {
 
     var task = {
       task: $("#taskInput").val(),
@@ -74,8 +65,6 @@ $(document).ready(function () {
     });
    });
 
-
-
   //Delete task from database
   $(".deleteTask").on("click", function () {
     var id = $("#taskItem").attr("data-id");
@@ -89,8 +78,6 @@ $(document).ready(function () {
     location.href = "/";
     });
   });
-
-
 
   //Add note to database
   $("#noteButton").on("click", function () {
@@ -108,9 +95,7 @@ $(document).ready(function () {
       JSON.stringify(data);
       console.log(data);
     })
-    
   });
-
 
   //Delete note 
   $(".deleteNote").on("click", function () {
@@ -124,7 +109,6 @@ $(document).ready(function () {
       console.log(result);
       location.href = "/";
     });
-
   });
 
 
@@ -132,10 +116,8 @@ $(document).ready(function () {
     var $spy = $(this).scrollspy('refresh');
   });
 
-
   //Returns to homepage
   $(".homeButton").on("click", function () {
-
     location.href = "/";
   });
 });

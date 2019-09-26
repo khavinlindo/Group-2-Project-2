@@ -1,18 +1,10 @@
-
-
-// Dependencies
-// =============================================================
 var db = require("../models");
 
-//=============================================================//
-//Routes
-//=============================================================//
 module.exports = function(app) {
   
-
-  /** Grocery List -- ID, Item, Catagory=======================================
-    catagories -- 1) produce 2) meats, 3) dairy, 4) dry goods, 5) non-grocery*/
-  //===========================================================================
+  //=========================================================
+  // Grocery Routes
+  //=========================================================
   
   // Get all groceries
   app.get("/api/groceries/all", function(req, res) {
@@ -41,7 +33,6 @@ module.exports = function(app) {
       amount: req.body.amount,
       date: req.body.date
     }).then(function(results) {
-      
       res.json(results);
     });
   });
@@ -60,14 +51,10 @@ module.exports = function(app) {
     });
   });
   
-  
-  
-  //====================================================
-  // Task List -- ID, Task, Priority
-  //    urgency -- 1) Top Priority, 2) Done Today, 3) This Week
+  //=========================================================
+  // Task Routes
   //=========================================================
     
-  
   //Get all tasks
   app.get("/api/tasks/all", function(req, res) {
       db.Task.findAll({}).then(function(results) {
@@ -100,6 +87,7 @@ module.exports = function(app) {
     });
   });
   
+
   // Delete a Task
   app.delete("/api/tasks/delete/:id", function(req, res) {
     console.log("Task ID: ");
@@ -113,11 +101,9 @@ module.exports = function(app) {
     });
   });
   
-  
-
-  //=====================================================
-  //Notes -- ID, Note, Author
-  //=====================================================  
+  //=========================================================
+  // Notes Routes
+  //=========================================================  
   
   // Get all Notes
     app.get("/api/notes/all", function(req, res) {
