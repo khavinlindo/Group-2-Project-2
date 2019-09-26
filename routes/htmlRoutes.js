@@ -36,7 +36,7 @@ module.exports = function (app) {
           where: {date: returnDate} 
         }).then(function (dbNotes) {
               
-          dayPlannerObject.notes = dbNote
+          dayPlannerObject.notes = dbNotes
 
           res.render("index", {
             groceries: dayPlannerObject.groceries,
