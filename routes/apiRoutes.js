@@ -157,12 +157,13 @@ module.exports = function(app) {
   app.delete("/api/notes/delete/:id", function(req, res) {
     console.log("Note ID: ");
     console.log(req.params.id);
+
     db.Notes.destroy({
       where: {
         id: req.params.id
       }
-    }).then(function(results) {
-      res.end(results);
+    }).then(function() {
+      res.end();
     });
   });
 };

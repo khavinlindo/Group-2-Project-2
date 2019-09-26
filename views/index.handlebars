@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12">
         <h1 class="text-center">{{msg}}</h1>
-        <h2 class="text-center">Home Page (figure out how to put current date here)</h2>
+        <h2 class="text-center">EZ Agenda</h2>
         <p>Current Date and Time: <span id="datetime"></span></p>
         <form method="GET" action="/">
           Requested Date: <input type="date" name="date" id="dateStamp">
@@ -28,9 +28,8 @@
           <div class="notes border border-info rounded" style="height:200px">
             <ul id="noteList" class="list-group">
               {{#each notes}}
-              <li data-id="{{this.id}}" class="list-group-item">
-                        <button id="deleteNote" class="btn btn-danger btn-sm float-right delete">ｘ</button>
-
+              <li data-id="{{this.id}}" class="list-group-item" id="noteItem">
+                        <button id="deleteNote" class="btn btn-danger btn-sm float-right deleteNote">ｘ</button>
                 <strong>By: </strong>{{this.author}}
                 <br>
                 <strong>Note: </strong>{{this.note}}

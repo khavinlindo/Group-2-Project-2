@@ -111,10 +111,10 @@ $(document).ready(function () {
     
   });
 
-  
+
   //Delete note 
-  $("#deleteNote").on("click", function () {
-    var id = $("li").attr("data-id");
+  $(".deleteNote").on("click", function () {
+    var id = $("#noteItem").attr("data-id");
     console.log(id);
 
     $.ajax({
