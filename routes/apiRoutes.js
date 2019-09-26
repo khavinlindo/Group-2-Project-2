@@ -21,7 +21,7 @@ module.exports = function(app) {
     });
   });
 
-  // Get a grocery by specific catagory
+  // Get groceries by specific catagory
   app.get("/api/groceries/:category", function(req, res) {
     db.Grocery.findAll({
       where: {
@@ -46,6 +46,7 @@ module.exports = function(app) {
     });
   });
 
+  
 // Delete a Grocery Item
   app.delete("/api/groceries/delete/:id", function(req, res) {
     console.log("Grocery ID:");

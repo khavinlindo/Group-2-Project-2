@@ -6,13 +6,13 @@ $(document).ready(function () {
   var dT = new Date();
 
   var day = dT.getDate();
-  
+
   var month;
-  if ((dT.getMonth()+1 < 10)) {
-    month = "0"+(dT.getMonth()+1)
+  if ((dT.getMonth() + 1 < 10)) {
+    month = "0" + (dT.getMonth() + 1)
   }
-  else if ((dT.getMonth()+1 >= 10)) {
-    month=dT.getMonth()+1;
+  else if ((dT.getMonth() + 1 >= 10)) {
+    month = dT.getMonth() + 1;
   }
 
   var year = dT.getFullYear();
@@ -28,9 +28,9 @@ $(document).ready(function () {
       date: year + "-" + month + "-" + day
     }
 
-    console.log(grocery.item);
-    console.log(grocery.category);
-    console.log(grocery.amount);
+    // console.log(grocery.item);
+    // console.log(grocery.category);
+    // console.log(grocery.amount);
 
 
     $.post("/api/groceries/new", grocery)
@@ -40,6 +40,22 @@ $(document).ready(function () {
         console.log(data);
       });
   });
+
+
+  //Delete grocery item from database
+  $(".deleteGrocery").on("click", function () {
+    var id = $("#groceryItem").attr("data-id");
+    console.log(id);
+
+    $.ajax({
+      url: "/api/groceries/delete/" + id,
+      type: "DELETE"
+    }).then(function (result) {
+      console.log(result);
+    location.href = "/";
+    });
+  });
+
 
 
 
@@ -70,33 +86,21 @@ $(document).ready(function () {
   });
 
 
-  //Add note to database
-  $("#noteButton").on("click", function () {
 
-    var note = {
-      author: $("#noteAuthor").val(),
-      note: $("#noteArea").val()
-    }
+  //Delete task from database
+  $(".deleteTask").on("click", function () {
+    var id = $("#taskItem").attr("data-id");
+    console.log(id);
 
-
-    $.post("/api/notes/new", note)
-      .then(function (data) {
-        JSON.stringify(data);
-        console.log(data);
-      })
+    $.ajax({
+      url: "/api/tasks/delete/" + id,
+      type: "DELETE"
+    }).then(function (result) {
+      console.log(result);
+    location.href = "/";
+    });
   });
 
-
-
-
-  $(".deleteNote").on("click", function (id) {
-    $.delete("/api/notes/delete/" + id);
-  })
-
-
-  $('[data-spy="scroll"]').each(function () {
-    var $spy = $(this).scrollspy('refresh')
-  })
 
 
   //Add note to database
@@ -108,16 +112,39 @@ $(document).ready(function () {
       date: year + "-" + month + "-" + day
     }
 
-
     $.post("/api/notes/new", note)
       .then(function (data) {
-        JSON.stringify(data);
         console.log(data);
       })
   });
 
 
-//Returns to homepage
+
+
+  //Delete note 
+  $("#deleteNote").on("click", function () {
+    var id = $("li").attr("data-id");
+    console.log(id);
+
+    $.ajax({
+      url: "/api/notes/delete/"+id,
+      type: "DELETE"
+    }).then(function (result) {
+      console.log(result);
+      location.href = "/";
+    });
+
+  });
+
+
+
+  $('[data-spy="scroll"]').each(function () {
+    var $spy = $(this).scrollspy('refresh')
+  })
+
+
+
+  //Returns to homepage
   $(".homeButton").on("click", function () {
 
     location.href = "/";

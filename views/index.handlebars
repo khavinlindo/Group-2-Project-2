@@ -5,14 +5,14 @@
         <h1 class="text-center">{{msg}}</h1>
         <h2 class="text-center">Home Page (figure out how to put current date here)</h2>
         <p>Current Date and Time: <span id="datetime"></span></p>
-        <form method="GET" action="/" >
-  Requested Date: <input type="date" name="date" id="dateStamp">
-  <input type="submit" id="submitDate">
-</form>
-         <script>
-         var dt = new Date();
-         document.getElementById("datetime").innerHTML = dt.toLocaleString();
-         </script>
+        <form method="GET" action="/">
+          Requested Date: <input type="date" name="date" id="dateStamp">
+          <input type="submit" id="submitDate">
+        </form>
+        <script>
+          var dt = new Date();
+          document.getElementById("datetime").innerHTML = dt.toLocaleString();
+        </script>
       </div>
       <div class="firstColumn col-6">
         <div class="calendarContainer">
@@ -21,19 +21,22 @@
 
           </div>
         </div>
+        
+        
+        
         <div class="notesContainer">
           <h2><a href="/note">Notes</h2></a>
           <div class="notes border border-info rounded" style="height:200px">
             <ul id="noteList" class="list-group">
               {{#each notes}}
-              <li data-id="{{this.id}}" class="list-group-item">
-                        <button class="deleteNote" class="btn btn-danger btn-sm float-right delete">ｘ</button>
+              <li data-id="{{this.id}}" id="noteItem" class="list-group-item">
+                <button class="btn btn-danger btn-sm float-right delete" id="deleteNote">ｘ</button>
 
-            <strong>By: </strong>{{this.author}}
-            <br>
-            <strong>Note: </strong>{{this.note}}
-          </li>
-          {{/each}}
+                <strong>By: </strong>{{this.author}}
+                <br>
+                <strong>Note: </strong>{{this.note}}
+              </li>
+              {{/each}}
             </ul>
           </div>
         </div>
@@ -43,14 +46,14 @@
         <div class="todoContainer">
           <h2><a href="/task">To Do</h2></a>
           <div class="todo border border-danger rounded" style="height: 450px">
-              <ul id="taskList" class="list-group">
+            <ul id="taskList" class="list-group">
               {{#each tasks}}
-              <li data-id="{{this.id}}" class="list-group-item">
-            <button id="deleteTask" class="btn btn-danger btn-sm float-right delete">ｘ</button>
-            <strong>Task: </strong>{{this.task}}
-            <strong>Urgency: </strong>{{this.urgency}}
-          </li>
-          {{/each}}
+              <li data-id="{{this.id}}" id="taskItem" class="list-group-item">
+                <button class="btn btn-danger btn-sm float-right delete deleteTask">ｘ</button>
+                <strong>Task: </strong>{{this.task}}
+                <strong>Urgency: </strong>{{this.urgency}}
+              </li>
+              {{/each}}
             </ul>
           </div>
         </div>
@@ -62,16 +65,15 @@
           <div class="grocery border border-warning rounded" style="height: 450px">
             <ul id="groceryList" class="list-group">
               {{#each groceries}}
-              <li data-id="{{this.id}}" class="list-group-item">
-                  <button id="deleteGrocery" class="btn btn-danger btn-sm float-right delete">ｘ</button>
-
-            <strong>Item: </strong>{{this.item}}
-            <br> 
-            <strong>Amount: </strong>{{this.amount}}
-            <br>
-            <strong>Category: </strong>{{this.category}} 
-          </li>
-          {{/each}}
+              <li class="list-group-item" id="groceryItem" data-id="{{this.id}}">
+                <button class="btn btn-danger btn-sm float-right delete deleteGrocery">ｘ</button>
+                <strong>Item: </strong>{{this.item}}
+                <br>
+                <strong>Amount: </strong>{{this.amount}}
+                <br>
+                <strong>Category: </strong>{{this.category}}
+              </li>
+              {{/each}}
             </ul>
           </div>
 
@@ -79,5 +81,5 @@
       </div>
 
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="/js/index.js"></script>
