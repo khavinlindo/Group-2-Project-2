@@ -5,9 +5,9 @@
         <h1 class="text-center">{{msg}}</h1>
         <h2 class="text-center">Home Page (figure out how to put current date here)</h2>
         <p>Current Date and Time: <span id="datetime"></span></p>
-        <form action="/">
-  Requested Date: <input type="date" name="start">
-  <input type="submit">
+        <form method="GET" action="/" >
+  Requested Date: <input type="date" name="date" id="dateStamp">
+  <input type="submit" id="submitDate">
 </form>
          <script>
          var dt = new Date();

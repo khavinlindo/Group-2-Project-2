@@ -6,30 +6,45 @@ var db = require("../models");
 module.exports = function (app) {
 
   app.get("/", function (req, res) {
+
+    //Formats current date
+   var dT = new Date();
+   var day = dT.getDate();
+   var month;
+   if ((dT.getMonth()+1 < 10)) {
+     month = "0"+(dT.getMonth()+1)
+   }
+   else if ((dT.getMonth()+1 >= 10)) {
+     month=dT.getMonth()+1;
+   }
+   var year = dT.getFullYear();
+    
+
     var dayPlannerObject = {};
-    var date = req.params.date || new Date().toLocaleDateString(); 
+    
+    var currentDate = year + "-" + month + "-" + day;
+    var returnDate = req.query.date || currentDate; 
 
-    console.log(date);
-
+  
     db.Grocery.findAll({
-      where: {createdAt: date} 
+      where: {date: returnDate} 
     })
       .then(function (dbGroceries) {
-        //console.log(dbGroceries);
+      
         dayPlannerObject.groceries = dbGroceries;
 
         db.Task.findAll({
-          where: {createdAt: date} 
+          where: {date: returnDate} 
         })
           .then(function (dbTasks) {
-            //console.log(dbTasks);
+            
             dayPlannerObject.tasks = dbTasks;
 
             db.Notes.findAll({
-              where: {createdAt: date} 
+              where: {date: returnDate} 
             })
               .then(function (dbNotes) {
-                //console.log(dbNotes);
+              
                 dayPlannerObject.notes = dbNotes;
 
                 res.render("index", {
@@ -41,8 +56,6 @@ module.exports = function (app) {
           });
       });
   });
-
-
 
 
   app.get("/grocery", function (req, res) {
@@ -59,7 +72,8 @@ module.exports = function (app) {
 
   app.get("/homepage", function (req, res) {
     res.redirect("/");
-  })
+  });
+
   
 };
 
