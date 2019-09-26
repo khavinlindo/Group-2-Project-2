@@ -161,8 +161,8 @@ module.exports = function(app) {
       where: {
         id: req.params.id
       }
-    }).then(function() {
-      res.end();
+    }).then(function(results) {
+      res.end(results);
     });
   });
 };

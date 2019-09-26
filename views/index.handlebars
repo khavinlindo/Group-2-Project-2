@@ -16,21 +16,20 @@
       </div>
       <div class="firstColumn col-6">
         <div class="calendarContainer">
-          <h2>Calendar</h2>
+          <h3 class="text-primary">Calendar</h3>
           <div class="calendar border border-primary rounded" style="height: 200px">
-
-          </div>
+<iframe src="https://calendar.google.com/calendar/b/3/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FNew_York&amp;src=ZGFydGgubWF0ZXIxOTc3QGdtYWlsLmNvbQ&amp;src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23039BE5&amp;color=%2333B679&amp;color=%230B8043" style="border-width:0" width="200" height="150" frameborder="0" scrolling="no"></iframe>          </div>
         </div>
         
         
         
         <div class="notesContainer">
-          <h2><a href="/note">Notes</h2></a>
+          <h3 class="text-primary">Notes <a class="btn btn-primary" role="button" href="/note">Add New!</h3></a>
           <div class="notes border border-info rounded" style="height:200px">
             <ul id="noteList" class="list-group">
               {{#each notes}}
-              <li data-id="{{this.id}}" id="noteItem" class="list-group-item">
-                <button class="btn btn-danger btn-sm float-right delete" id="deleteNote">ｘ</button>
+              <li data-id="{{this.id}}" class="list-group-item">
+                        <button id="deleteNote" class="btn btn-danger btn-sm float-right delete">ｘ</button>
 
                 <strong>By: </strong>{{this.author}}
                 <br>
@@ -44,9 +43,9 @@
 
       <div class="secondColumn col-3">
         <div class="todoContainer">
-          <h2><a href="/task">To Do</h2></a>
-          <div class="todo border border-danger rounded" style="height: 450px">
-            <ul id="taskList" class="list-group">
+          <h3 class="text-primary">To Do <a class="btn btn-primary" role="button" href="/task">Add New!</h3></a>
+          <div class="todo border border-danger rounded" style="height: 455px">
+              <ul id="taskList" class="list-group">
               {{#each tasks}}
               <li data-id="{{this.id}}" id="taskItem" class="list-group-item">
                 <button class="btn btn-danger btn-sm float-right delete deleteTask">ｘ</button>
@@ -61,8 +60,8 @@
 
       <div class="thirdColumn col-3">
         <div class="groceryContainer">
-          <h2><a href="/grocery">Grocery List</a></h2>
-          <div class="grocery border border-warning rounded" style="height: 450px">
+          <h3 class="text-primary">Grocery List <a class="btn btn-primary" role="button" href="/grocery">Add New!</h3></a>
+          <div class="grocery border border-warning rounded" style="height: 455px">
             <ul id="groceryList" class="list-group">
               {{#each groceries}}
               <li class="list-group-item" id="groceryItem" data-id="{{this.id}}">

@@ -28,14 +28,12 @@ $(document).ready(function () {
       date: year + "-" + month + "-" + day
     }
 
-    // console.log(grocery.item);
-    // console.log(grocery.category);
-    // console.log(grocery.amount);
-
 
     $.post("/api/groceries/new", grocery)
       .then(function (data) {
-
+        $('#item').val('');
+        $('#groceryCategory').val('');
+        $('#groceryQuantity').val('');
         JSON.stringify(data);
         console.log(data);
       });
@@ -59,31 +57,22 @@ $(document).ready(function () {
 
 
 
-  //Add task to database
-  $("#addTask").on("click", function () {
-
-    var priority;
-
-    if ($("#todayButton").val()) {
-      priority = 1;
-    } else if ($("#thisWeekButton").val()) {
-      priority = 3;
-    } else if ($("#asapButton").val()) {
-      priority = 2;
-    }
+  // //Add task to database
+   $("#addTask").on("click", function () {
 
     var task = {
       task: $("#taskInput").val(),
-      urgency: priority,
+      urgency: $("input[name='urgency']:checked").val(),
       date: year + "-" + month + "-" + day
     }
 
     $.post("/api/tasks/new", task)
-      .then(function (data) {
-        JSON.stringify(data);
-        console.log(data);
-      })
-  });
+    .then(function(data) {
+      $('#taskInput').val('');
+      JSON.stringify(data);
+      console.log(data);
+    });
+   });
 
 
 
@@ -113,14 +102,16 @@ $(document).ready(function () {
     }
 
     $.post("/api/notes/new", note)
-      .then(function (data) {
-        console.log(data);
-      })
+    .then(function(data) {
+      $('#noteAuthor').val('');
+      $('#noteArea').val('');
+      JSON.stringify(data);
+      console.log(data);
+    })
+    
   });
 
-
-
-
+  
   //Delete note 
   $("#deleteNote").on("click", function () {
     var id = $("li").attr("data-id");
@@ -137,11 +128,9 @@ $(document).ready(function () {
   });
 
 
-
   $('[data-spy="scroll"]').each(function () {
-    var $spy = $(this).scrollspy('refresh')
-  })
-
+    var $spy = $(this).scrollspy('refresh');
+  });
 
 
   //Returns to homepage
@@ -149,16 +138,6 @@ $(document).ready(function () {
 
     location.href = "/";
   });
-
-
 });
-
-
-
-
-
-
-
-
 
 
