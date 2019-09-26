@@ -21,7 +21,9 @@ $(document).ready(function () {
 
     $.post("/api/groceries/new", grocery)
       .then(function (data) {
-
+        $('#item').val('');
+        $('#groceryCategory').val('');
+        $('#groceryQuantity').val('');
         JSON.stringify(data);
         console.log(data);
       });
@@ -33,23 +35,14 @@ $(document).ready(function () {
   //Add task to database
   $("#addTask").on("click", function () {
 
-     var priority;
-     
-     if ($("#todayButton").val()) {
-       priority = 1;
-     } else if ($("#thisWeekButton").val()) {
-       priority = 3;
-     } else if ($("#asapButton").val()) {
-       priority = 2;
-     }
-
     var task = {
       task: $("#taskInput").val(),
-      urgency: priority
+      urgency: $("input[name='urgency']:checked").val()
     }
 
     $.post("/api/tasks/new", task)
     .then(function(data) {
+      $('#taskInput').val('');
       JSON.stringify(data);
       console.log(data);
     })
@@ -68,14 +61,21 @@ $("#noteButton").on("click", function () {
 
   $.post("/api/notes/new", note)
   .then(function(data) {
+    $('#noteAuthor').val('');
+    $('#noteArea').val('');
     JSON.stringify(data);
     console.log(data);
   })
 });
 
-$(".deleteNote").on("click", function (id) {
-  $.delete("/api/notes/delete/" + id);
-})
+$("#noteList").on("click", ".deleteNote", function (id) {
+
+  var idToDelete = $(this)
+  .parent()
+  .attr("data-id");
+
+  $.delete("/api/notes/delete/" + id, idToDelete);
+});
 
 $(".homeButton").on("click", function () {
  

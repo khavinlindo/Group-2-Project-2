@@ -24,3 +24,24 @@ body {
 #title {
   font-size: 100px;
 }
+
+.calendarContainer {
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+.card {
+  margin-top: 25px;
+}
+
+.form-check {
+  margin-bottom: 5px;
+}
+
+.radioContainer {
+  margin-bottom: 10px;
+}
+
+.groceryForm {
+  margin-left: 10px;
+}
