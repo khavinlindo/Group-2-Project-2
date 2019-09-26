@@ -117,9 +117,12 @@ $(document).ready(function () {
   });
 
   //Returns to homepage
-  $(".homeButton").on("click", function () {
+  $(".homeButton").on("click", function (e) {
+    e.preventDefault();
     location.href = "/";
   });
+
+  
 });
 
 
